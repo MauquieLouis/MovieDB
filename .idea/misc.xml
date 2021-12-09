@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/TelecomSudparis/AndroidStudio/MovieDB/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/TelecomSudparis/AndroidStudio/MovieDB/app/src/main/res/layout/activity_detail.xml" value="0.264" />
+        <entry key="..\:/TelecomSudparis/AndroidStudio/MovieDB/app/src/main/res/layout/activity_list.xml" value="0.176" />
+        <entry key="..\:/TelecomSudparis/AndroidStudio/MovieDB/app/src/main/res/layout/activity_main.xml" value="0.144" />
+        <entry key="..\:/TelecomSudparis/AndroidStudio/MovieDB/app/src/main/res/layout/textviewlayout.xml" value="0.264" />
       </map>
     </option>
   </component>
