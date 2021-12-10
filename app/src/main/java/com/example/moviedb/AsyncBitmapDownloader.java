@@ -56,7 +56,7 @@ public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap bitmap){
-        ImageView image = (ImageView) myActiviy.findViewById(R.id.image);
+        ImageView image = (ImageView) myActiviy.findViewById(R.id.imageViewBackground);
         image.setImageBitmap(bitmap);
     }
 }

@@ -34,10 +34,12 @@ public class MyAdapter extends BaseAdapter {
 
     Vector<String> vector = new Vector<String>();
     Vector<String> urls_images = new Vector<String>();
+    Vector<String> urls_imagesBackground = new Vector<String>();
 
-    public void add(String title, String url){
+    public void add(String title, String url, String imgBack){
         vector.add(title);
         urls_images.add(url);
+        urls_imagesBackground.add(imgBack);
     }
 
     @Override
@@ -73,12 +75,12 @@ public class MyAdapter extends BaseAdapter {
         tv.setText(vector.get(i).toString());
         LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.linearLayout);
         Log.e("JLMZ51", "END adapter de ses moooooooorts");
-        linearLayout.setOnClickListener(clickInLinearLayout(vector.get(i)));
+        linearLayout.setOnClickListener(clickInLinearLayout(vector.get(i), urls_imagesBackground.get(i)));
 
         return v;
     }
 
-    private View.OnClickListener clickInLinearLayout(String title){
+    private View.OnClickListener clickInLinearLayout(String title, String url_imageBck){
         return new View.OnClickListener(){
 
             @Override
@@ -86,6 +88,7 @@ public class MyAdapter extends BaseAdapter {
                 Log.e("JLMZ51","Click on titre : "+title);
                 Intent i = new Intent(context,DetailActivity.class);
                 i.putExtra("title",title);
+                i.putExtra("url_img",url_imageBck);
                 v.getContext().startActivity(i);
 
             }
