@@ -3,13 +3,22 @@ package com.example.moviedb;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.provider.ContactsContract;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
 
 import org.w3c.dom.Text;
 
@@ -26,8 +35,9 @@ public class MyAdapter extends BaseAdapter {
     Vector<String> vector = new Vector<String>();
     Vector<String> urls_images = new Vector<String>();
 
-    public void add(String url){
-        vector.add(url);
+    public void add(String title, String url){
+        vector.add(title);
+        urls_images.add(url);
     }
 
     @Override
@@ -48,10 +58,23 @@ public class MyAdapter extends BaseAdapter {
         Log.e("JLMZ51","A faire");
         @SuppressLint("ViewHolder") View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.textviewlayout, viewGroup,false);
         TextView tv = (TextView) v.findViewById(R.id.textViewInfo);
+        ImageView img = (ImageView) v.findViewById(R.id.imageView);
+        RequestQueue queue = MySingleton.getInstance(viewGroup.getContext()).getRequestQueue();
+        Response.Listener<Bitmap> rep_Listener = response -> {
+            Log.e("JLMZ51", "I got a Bitmap !");
+            img.setImageBitmap(response);
+        };
+        ImageRequest request = new ImageRequest(
+                urls_images.get(i).toString(),
+                rep_Listener,
+                600,
+                600,null,Bitmap.Config.RGB_565,null);
+        queue.add(request);
         tv.setText(vector.get(i).toString());
         LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.linearLayout);
         Log.e("JLMZ51", "END adapter de ses moooooooorts");
         linearLayout.setOnClickListener(clickInLinearLayout(vector.get(i)));
+
         return v;
     }
 
