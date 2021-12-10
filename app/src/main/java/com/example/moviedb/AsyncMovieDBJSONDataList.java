@@ -74,10 +74,11 @@ public class AsyncMovieDBJSONDataList extends AsyncTask<String, Void, JSONObject
                     String title = (String) array.getJSONObject(i).get("original_title");
                     String poster_path = (String) array.getJSONObject(i).get("poster_path").toString();
                     String backdrop_path = (String) array.getJSONObject(i).get("backdrop_path").toString();
+                    int idFilm = (int) array.getJSONObject(i).get("id");
                     Log.i("JLMZ51", " Adding to adapter title : "+ title);
                     String urlImage = "https://image.tmdb.org/t/p/w300"+poster_path;
                     String urlImageBck = "https://image.tmdb.org/t/p/w500"+backdrop_path;
-                    adapter.add(title, urlImage, urlImageBck);
+                    adapter.add(title, urlImage, urlImageBck, idFilm);
                 }
                 adapter.notifyDataSetChanged();
                 Log.e("JLMZ51", "count : "+adapter.getCount());

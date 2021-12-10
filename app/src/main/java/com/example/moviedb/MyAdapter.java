@@ -35,11 +35,13 @@ public class MyAdapter extends BaseAdapter {
     Vector<String> vector = new Vector<String>();
     Vector<String> urls_images = new Vector<String>();
     Vector<String> urls_imagesBackground = new Vector<String>();
+    Vector<Integer> ids = new Vector<Integer>();
 
-    public void add(String title, String url, String imgBack){
+    public void add(String title, String url, String imgBack, int idFilm){
         vector.add(title);
         urls_images.add(url);
         urls_imagesBackground.add(imgBack);
+        ids.add(idFilm);
     }
 
     @Override
@@ -75,12 +77,12 @@ public class MyAdapter extends BaseAdapter {
         tv.setText(vector.get(i).toString());
         LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.linearLayout);
         Log.e("JLMZ51", "END adapter de ses moooooooorts");
-        linearLayout.setOnClickListener(clickInLinearLayout(vector.get(i), urls_imagesBackground.get(i)));
+        linearLayout.setOnClickListener(clickInLinearLayout(vector.get(i), urls_imagesBackground.get(i),ids.get(i)));
 
         return v;
     }
 
-    private View.OnClickListener clickInLinearLayout(String title, String url_imageBck){
+    private View.OnClickListener clickInLinearLayout(String title, String url_imageBck, int id_film){
         return new View.OnClickListener(){
 
             @Override
@@ -89,6 +91,7 @@ public class MyAdapter extends BaseAdapter {
                 Intent i = new Intent(context,DetailActivity.class);
                 i.putExtra("title",title);
                 i.putExtra("url_img",url_imageBck);
+                i.putExtra("id", id_film);
                 v.getContext().startActivity(i);
 
             }

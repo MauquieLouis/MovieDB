@@ -28,6 +28,32 @@
             android:textSize="24sp"
             tools:textAlignment="center" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="109dp"
+            android:text="Description Film" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ajouter aux favoris"
+            android:onClick="addFavorite"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favori : oui ou non ?" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accéder aux favoris"
+            android:onClick="accesFavoris"/>
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
