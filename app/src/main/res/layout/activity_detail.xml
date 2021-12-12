@@ -6,54 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
-    <LinearLayout
-        android:layout_width="391dp"
-        android:layout_height="849dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="391dp"
+            android:layout_height="849dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
 
-        <ImageView
-            android:id="@+id/imageViewBackground"
-            android:layout_width="match_parent"
-            android:layout_height="273dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            <ImageView
+                android:id="@+id/imageViewBackground"
+                android:layout_width="match_parent"
+                android:layout_height="273dp"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            tools:textAlignment="center" />
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                tools:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="109dp"
-            android:text="Description Film" />
+            <TextView
+                android:id="@+id/textViewNote"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:text="Note"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ajouter aux favoris"
-            android:onClick="addFavorite"/>
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Date"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Favori : oui ou non ?" />
+            <TextView
+                android:id="@+id/textViewDescriptionFilm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description Film" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Accéder aux favoris"
-            android:onClick="accesFavoris"/>
+            <Button
+                android:id="@+id/buttonfavorite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajouter aux favoris"
+                android:onClick="toggleFavorite"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Favori : oui ou non ?" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Accéder aux favoris"
+                android:onClick="accesFavoris"/>
 
 
-    </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

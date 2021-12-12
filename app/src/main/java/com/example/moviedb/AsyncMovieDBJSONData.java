@@ -2,6 +2,7 @@ package com.example.moviedb;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,9 +18,9 @@ import java.nio.charset.StandardCharsets;
 
 public class AsyncMovieDBJSONData extends AsyncTask<String, Void, JSONObject> {
 
-    private MainActivity activity;
-    public AsyncMovieDBJSONData(MainActivity mainActivity){
-        this.activity = mainActivity;
+    private DetailActivity activity;
+    public AsyncMovieDBJSONData(DetailActivity DetailActivity){
+        this.activity = DetailActivity;
     }
 
     @Override
@@ -62,14 +63,28 @@ public class AsyncMovieDBJSONData extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
-        //Log.i("JLMZ51","JSON data: "+jsonObject);
+
+        TextView tvDate = (TextView) activity.findViewById(R.id.textViewDate);
+        TextView tvDescFilm = (TextView) activity.findViewById(R.id.textViewDescriptionFilm);
+        TextView tvNote = (TextView) activity.findViewById(R.id.textViewNote);
         try {
-            JSONObject jsonObjTest = jsonObject.getJSONArray("results").getJSONObject(1);
-            Log.e("JLMZ51", (String) jsonObjTest.get("original_title"));
-            //Faire une fonction ou une classe qui rempli la ListView
-        } catch (JSONException e) {
-            e.printStackTrace();
+            String date = (String) jsonObject.get("release_date");
+            tvDate.setText(date);
+        }catch (JSONException e){
+
         }
+        try {
+            Double vote = (Double) jsonObject.get("vote_average");
+            tvNote.setText(vote+"/10");
+        }catch (JSONException e){
+        }
+        try {
+            String overview = (String) jsonObject.get("overview");
+            tvDescFilm.setText(overview);
+        }catch (JSONException e){
+
+        }
+
     }
 
     private String convertInputStreamToString(InputStream is) throws IOException {
