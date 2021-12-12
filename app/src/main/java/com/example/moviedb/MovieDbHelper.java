@@ -13,7 +13,10 @@ public class MovieDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE "+ MovieContract.MovieEntry.TABLE_NAME + " ("+
                     MovieContract.MovieEntry._ID + " INTEGER PRIMARY KEY,"+
-                    MovieContract.MovieEntry.COLUMN_NAME_ID_FILM+" TEXT)";
+                    MovieContract.MovieEntry.COLUMN_NAME_ID_FILM+" TEXT, "+
+                    MovieContract.MovieEntry.COLUMN_NAME_TITRE_FILM+" TEXT, "+
+                    MovieContract.MovieEntry.COLUMN_NAME_IMG_FILM+" TEXT, "+
+                    MovieContract.MovieEntry.COLUMN_NAME_IMGBCK_FILM+" TEXT)";
     //+ FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =

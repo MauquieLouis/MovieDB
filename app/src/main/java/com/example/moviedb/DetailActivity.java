@@ -22,6 +22,9 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tv;
     private ImageView img;
     private int idFilm;
+    private String title;
+    private String url_imgP;
+    private String url_imgbck;
     private SQLiteDatabase db;
     private SQLiteDatabase dbr;
     private boolean favorite;
@@ -37,15 +40,16 @@ public class DetailActivity extends AppCompatActivity {
         int id_film = 0;
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            String title = extras.getString("title");
-            String url_img = extras.getString("url_img");
+            title = extras.getString("title");
+            url_imgbck = extras.getString("url_imgbck");
+            url_imgP = extras.getString("url_img");
             id_film = extras.getInt("id");
             idFilm = extras.getInt("id");
             tv = (TextView) findViewById(R.id.textViewTitle);
-            Log.e("JLMZ51","le fameux lien : "+url_img);
-            if(url_img != null){
+            Log.e("JLMZ51","le fameux lien : "+url_imgbck);
+            if(url_imgbck != null){
                 AsyncBitmapDownloader bmpD = new AsyncBitmapDownloader(this);
-                bmpD.execute(url_img);
+                bmpD.execute(url_imgbck);
             }
             tv.setText(title);
         }
@@ -81,6 +85,9 @@ public class DetailActivity extends AppCompatActivity {
     public void addFavorite(View view){
         ContentValues values = new ContentValues();
         values.put(MovieContract.MovieEntry.COLUMN_NAME_ID_FILM, idFilm);
+        values.put(MovieContract.MovieEntry.COLUMN_NAME_TITRE_FILM, title);
+        values.put(MovieContract.MovieEntry.COLUMN_NAME_IMG_FILM,url_imgP);
+        values.put(MovieContract.MovieEntry.COLUMN_NAME_IMGBCK_FILM,url_imgbck);
         long newRowId = db.insert(MovieContract.MovieEntry.TABLE_NAME, null, values);
     }
     public void toggleFavorite(View view){
@@ -97,6 +104,9 @@ public class DetailActivity extends AppCompatActivity {
             favorite = true;
             ContentValues values = new ContentValues();
             values.put(MovieContract.MovieEntry.COLUMN_NAME_ID_FILM, idFilm);
+            values.put(MovieContract.MovieEntry.COLUMN_NAME_TITRE_FILM, title);
+            values.put(MovieContract.MovieEntry.COLUMN_NAME_IMG_FILM,url_imgP);
+            values.put(MovieContract.MovieEntry.COLUMN_NAME_IMGBCK_FILM,url_imgbck);
             long newRowId = db.insert(MovieContract.MovieEntry.TABLE_NAME, null, values);
             favoriteButton.setText("Enlever des favoris");
         }
@@ -104,7 +114,6 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void accesFavoris(View view){
-
 
         Intent i = new Intent(DetailActivity.this, FavorisActivity.class);
         startActivity(i);

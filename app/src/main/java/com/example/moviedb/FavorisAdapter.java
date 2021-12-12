@@ -3,10 +3,9 @@ package com.example.moviedb;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.media.Image;
-import android.provider.ContactsContract;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +19,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 
-import org.w3c.dom.Text;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
-public class MyAdapter extends BaseAdapter {
+
+
+public class FavorisAdapter extends BaseAdapter {
 
     private Context context;
+    private SQLiteDatabase db;
+    private SQLiteDatabase dbr;
+    private int count;
 
-    public MyAdapter(Context context){
+    public FavorisAdapter(Context context){
         this.context = context;
     }
 
@@ -37,11 +41,43 @@ public class MyAdapter extends BaseAdapter {
     Vector<String> urls_imagesBackground = new Vector<String>();
     Vector<Integer> ids = new Vector<Integer>();
 
-    public void add(String title, String url, String imgBack, int idFilm){
+    /*public void add(String title, String url, String imgBack, int idFilm){
         vector.add(title);
         urls_images.add(url);
         urls_imagesBackground.add(imgBack);
         ids.add(idFilm);
+    }*/
+    public void readDatabase(){
+        MovieDbHelper dbHelper = new MovieDbHelper(context);
+        db = dbHelper.getWritableDatabase();
+        dbr = dbHelper.getReadableDatabase();
+        Cursor cursor = dbr.rawQuery("SELECT * FROM "+ MovieContract.MovieEntry.TABLE_NAME,null);
+        count = cursor.getCount();
+        cursor.close();
+        Cursor cursor2 = dbr.rawQuery("SELECT * FROM "+ MovieContract.MovieEntry.TABLE_NAME,null);
+        List itemsIds = new ArrayList<>();
+        while(cursor2.moveToNext()){
+            long itemId = cursor2.getLong(
+                    cursor2.getColumnIndexOrThrow(MovieContract.MovieEntry._ID)
+            );
+            itemsIds.add(itemId);
+            ids.add(cursor2.getInt(
+                    cursor2.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_NAME_ID_FILM)
+            ));
+            vector.add(cursor2.getString(
+                    cursor2.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_NAME_TITRE_FILM)
+            ));
+            urls_images.add(cursor2.getString(
+                    cursor2.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_NAME_IMG_FILM)
+            ));
+            urls_imagesBackground.add(cursor2.getString(
+                    cursor2.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_NAME_IMGBCK_FILM)
+            ));
+        }
+        Log.e("JLMZ51","image : "+urls_images.get(0));
+        Log.e("JLMZ51","imageBck : "+urls_imagesBackground.get(0));
+        Log.e("JLMZ51","Titre : "+vector.get(0));
+        cursor2.close();
     }
 
     @Override
@@ -59,7 +95,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        Log.e("JLMZ51","A faire");
+        Log.e("JLMZ51","A faire Favorissssssss");
         @SuppressLint("ViewHolder") View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.textviewlayout, viewGroup,false);
         TextView tv = (TextView) v.findViewById(R.id.textViewInfo);
         ImageView img = (ImageView) v.findViewById(R.id.imageView);
@@ -69,12 +105,12 @@ public class MyAdapter extends BaseAdapter {
             img.setImageBitmap(response);
         };
         ImageRequest request = new ImageRequest(
-                urls_images.get(i).toString(),
+                urls_images.get(i),
                 rep_Listener,
                 600,
                 600,null,Bitmap.Config.RGB_565,null);
         queue.add(request);
-        tv.setText(vector.get(i).toString());
+        tv.setText(vector.get(i));
         LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.linearLayout);
         Log.e("JLMZ51", "END adapter de ses moooooooorts");
         linearLayout.setOnClickListener(clickInLinearLayout(vector.get(i), urls_imagesBackground.get(i),ids.get(i), urls_images.get(i)));
@@ -98,5 +134,4 @@ public class MyAdapter extends BaseAdapter {
             }
         };
     }
-
 }
