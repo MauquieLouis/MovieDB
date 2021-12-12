@@ -7,9 +7,23 @@
     tools:context=".FavorisActivity">
 
     <ListView
-        android:layout_width="391dp"
-        android:layout_height="849dp"
         android:id="@+id/listFavoris"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        android:layout_width="397dp"
+        android:layout_height="635dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.818"
+        tools:layout_editor_absoluteX="-2dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="398dp"
+        android:layout_height="60dp"
+        android:text="Favoris"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/listFavoris"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.638"
+        tools:layout_editor_absoluteX="-3dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
