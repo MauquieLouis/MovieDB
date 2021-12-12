@@ -98,5 +98,11 @@ public class MyAdapter extends BaseAdapter {
             }
         };
     }
+    public void clear(){
+        vector.clear();
+        ids.clear();
+        urls_images.clear();
+        urls_imagesBackground.clear();
+    }
 
 }

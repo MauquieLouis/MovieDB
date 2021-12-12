@@ -3,6 +3,7 @@ package com.example.moviedb;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,12 +31,14 @@ public class DetailActivity extends AppCompatActivity {
     private SQLiteDatabase dbr;
     private boolean favorite;
     private Button favoriteButton;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        context = getApplicationContext();
         favoriteButton = (Button) findViewById(R.id.buttonfavorite);
 
         int id_film = 0;
@@ -99,6 +103,10 @@ public class DetailActivity extends AppCompatActivity {
             Log.e("JLMZ51", selectionArgs[0]);
             int deletedRows = db.delete(MovieContract.MovieEntry.TABLE_NAME, selection,selectionArgs);
             favoriteButton.setText("Ajouter aux favoris");
+            CharSequence text = "Film retiré des favoris !";
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }else{
             //Ajouter aux favoris + changer texte button.
             favorite = true;
@@ -109,6 +117,10 @@ public class DetailActivity extends AppCompatActivity {
             values.put(MovieContract.MovieEntry.COLUMN_NAME_IMGBCK_FILM,url_imgbck);
             long newRowId = db.insert(MovieContract.MovieEntry.TABLE_NAME, null, values);
             favoriteButton.setText("Enlever des favoris");
+            CharSequence text = "Film ajouté aux favoris !";
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
 
     }

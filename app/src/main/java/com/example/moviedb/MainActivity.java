@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void searchMovie(View view){
+        adapter.clear();
         String text = editText.getText().toString();
         Log.i("JLMZ51 : button search", text);
         String url = new String("https://api.themoviedb.org/3/search/movie?api_key=" + API_TOKEN + "&language=fr&query=" + text + "&page=1");
@@ -43,5 +44,11 @@ public class MainActivity extends AppCompatActivity {
         AsyncMovieDBJSONDataList task2 = new AsyncMovieDBJSONDataList(adapter);
         task2.execute(url);
 
+
+    }
+
+    public void accesFavoris(View view){
+        Intent i = new Intent(MainActivity.this, FavorisActivity.class);
+        startActivity(i);
     }
 }
